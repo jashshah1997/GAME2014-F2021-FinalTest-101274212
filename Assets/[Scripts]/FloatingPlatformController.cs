@@ -5,6 +5,7 @@
  * Date last modified:  17/12/2021
  * Program Description: Controls the behaviour of floating platforms.
  * Revision History:
+ *      - 17/12/2021 - Floating Platform initial implementation of shrinking behaviour
  */
 
 using System.Collections;

@@ -5,6 +5,7 @@
  * Date last modified:  17/12/2021
  * Program Description: Controls the player behaviour.
  * Revision History:
+ *      - 17/12/2021 - Correctly set Player transform for the floating platform.
  */
 
 using System.Collections;
