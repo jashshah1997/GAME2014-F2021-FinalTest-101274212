@@ -19,7 +19,7 @@ public class FloatingPlatformController : MonoBehaviour
     private GameObject player;
     private GameObject child_platform;
     public bool isActive = false;
-    private const float SHRINKING_CONSTATNT = 0.999f;
+    private const float SHRINKING_CONSTATNT = 0.001f;
 
     // Start is called before the first frame update
     void Start()
@@ -42,11 +42,11 @@ public class FloatingPlatformController : MonoBehaviour
         var newScale = child_platform.transform.localScale;
         if (isActive)
         {
-            newScale.x = newScale.x * SHRINKING_CONSTATNT;
+            if (newScale.x > 0) newScale.x = newScale.x - 2 * SHRINKING_CONSTATNT;
         }
         else
         {
-            if (newScale.x < 1) newScale.x = (2 - SHRINKING_CONSTATNT) * newScale.x;
+            if (newScale.x < 1) newScale.x = newScale.x + SHRINKING_CONSTATNT;
         }
         child_platform.transform.localScale = newScale;
     }
