@@ -1,4 +1,13 @@
-﻿using System.Collections;
+﻿/**
+ * Filename:            PlayerBehaviour.cs
+ * Student Name:        Jash Shah
+ * Student ID:          101274212
+ * Date last modified:  17/12/2021
+ * Program Description: Controls the player behaviour.
+ * Revision History:
+ */
+
+using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
 using Unity.Mathematics;
@@ -282,6 +291,12 @@ public class PlayerBehaviour : MonoBehaviour
             other.gameObject.GetComponent<MovingPlatformController>().isActive = true;
             transform.SetParent(other.gameObject.transform);
         }
+
+        if (other.gameObject.CompareTag("Floating Platform"))
+        {
+            other.gameObject.transform.parent.GetComponent<FloatingPlatformController>().isActive = true;
+            transform.SetParent(other.gameObject.transform.parent);
+        }
     }
 
     private void OnCollisionExit2D(Collision2D other)
@@ -289,6 +304,12 @@ public class PlayerBehaviour : MonoBehaviour
         if (other.gameObject.CompareTag("Moving Platform"))
         {
             other.gameObject.GetComponent<MovingPlatformController>().isActive = false;
+            transform.SetParent(parent);
+        }
+
+        if (other.gameObject.CompareTag("Floating Platform"))
+        {
+            other.gameObject.transform.parent.GetComponent<FloatingPlatformController>().isActive = false;
             transform.SetParent(parent);
         }
     }
