@@ -6,6 +6,7 @@
  * Program Description: Controls the behaviour of floating platforms.
  * Revision History:
  *      - 17/12/2021 - Floating Platform initial implementation of shrinking behaviour
+ *      - 17/12/2021 - Expand the platform if the player is not standing on it
  */
 
 using System.Collections;
@@ -18,6 +19,7 @@ public class FloatingPlatformController : MonoBehaviour
     private GameObject player;
     private GameObject child_platform;
     public bool isActive = false;
+    private const float SHRINKING_CONSTATNT = 0.999f;
 
     // Start is called before the first frame update
     void Start()
@@ -36,16 +38,16 @@ public class FloatingPlatformController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Adjust Platform scale based on ativity
+        var newScale = child_platform.transform.localScale;
         if (isActive)
         {
-            var currentScale = child_platform.transform.localScale;
-            currentScale.x = currentScale.x * 0.999f;
-            child_platform.transform.localScale = currentScale;
+            newScale.x = newScale.x * SHRINKING_CONSTATNT;
         }
-    }
-
-    public void Reset()
-    {
-
+        else
+        {
+            if (newScale.x < 1) newScale.x = (2 - SHRINKING_CONSTATNT) * newScale.x;
+        }
+        child_platform.transform.localScale = newScale;
     }
 }
